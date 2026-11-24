@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101827" />
+  <title>{{ app_name }} · IT Support Copilot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', path='CSS/style.css') }}" />
+</head>
+<body>
+<div class="app-shell">
+  <div class="sidebar-scrim" id="sidebarScrim"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand-row">
+      <div class="brand-mark"><i class="fa-solid fa-brain"></i></div>
+      <div class="brand-copy"><strong>synapse<span>.ai</span></strong><small>IT SERVICE DESK</small></div>
+      <button class="icon-button mobile-close" id="closeSidebar" aria-label="Close navigation"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <button class="new-chat" id="newChat"><i class="fa-solid fa-plus"></i><span>New conversation</span><kbd>Ctrl K</kbd></button>
+
+    <div class="sidebar-label">WORKSPACE</div>
+    <nav class="primary-nav" aria-label="Workspace navigation">
+      <button class="nav-link active" data-view="assistant"><i class="fa-regular fa-message"></i><span>AI assistant</span><span class="nav-live"></span></button>
+      <button class="nav-link" data-view="knowledge"><i class="fa-solid fa-book-open"></i><span>Knowledge base</span></button>
+      <button class="nav-link" data-view="activity"><i class="fa-solid fa-clock-rotate-left"></i><span>Activity history</span></button>
+    </nav>
+
+    <div class="history-heading"><span class="sidebar-label">RECENT CONVERSATIONS</span><button class="icon-button tiny" id="clearHistory" title="Clear all conversations" aria-label="Clear conversation history"><i class="fa-solid fa-trash-can"></i></button></div>
+    <div class="history-search"><i class="fa-solid fa-magnifying-glass"></i><input id="historySearch" type="search" placeholder="Search conversations" /></div>
+    <div id="historyList" class="history-list"><div class="history-empty"><i class="fa-regular fa-comments"></i><span>Your conversations will appear here.</span></div></div>
+
+    <div class="sidebar-spacer"></div>
+    <button class="sidebar-status" id="healthRefresh" title="Click to check service health again">
+      <div class="status-top"><span class="status-pulse" id="healthDot"></span><strong id="systemStatusText">Checking services…</strong><i class="fa-solid fa-rotate-right refresh-icon"></i></div>
+      <p id="systemStatusDetail">Connecting to the support workspace</p>
+    </button>
+    <div class="profile-row"><div class="profile-avatar">IT</div><div class="profile-copy"><strong>IT Support</strong><span>Enterprise workspace</span></div><span class="private-label"><i class="fa-solid fa-shield-halved"></i> Private</span></div>
+  </aside>
+
+  <main class="main-panel">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-button mobile-menu" id="menuToggle" aria-label="Open navigation"><i class="fa-solid fa-bars-staggered"></i></button>
+        <div><div class="breadcrumbs">Workspace <i class="fa-solid fa-chevron-right"></i> <span id="breadcrumbCurrent">AI assistant</span></div><h1 id="pageTitle">IT Support Assistant</h1></div>
+      </div>
+      <div class="topbar-actions">
+        <div class="secure-pill"><i class="fa-solid fa-shield-halved"></i><span>Private workspace</span></div>
+        <span class="topbar-divider"></span>
+        <div class="online-pill"><span class="status-pulse" id="topHealthDot"></span><span id="topHealthText">Checking status</span></div>
+        <button class="icon-button" id="helpButton" title="About Synapse AI" aria-label="About Synapse AI"><i class="fa-regular fa-circle-question"></i></button>
+      </div>
+    </header>
+
+    <section class="view-panel active" id="assistantView" data-panel="assistant">
+      <div class="chat-scroll" id="chatArea">
+        <div class="welcome-wrap" id="welcomeScreen">
+          <div class="welcome-kicker"><span class="kicker-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span> YOUR AI-POWERED SERVICE DESK <span class="kicker-line"></span></div>
+          <h2>IT support, <span>without<br class="desktop-break" /> the waiting.</span></h2>
+          <p class="welcome-subtitle">Your intelligent workplace companion. Get clear answers, troubleshoot issues, and find guidance grounded in your organisation’s knowledge base.</p>
+          <div class="capability-strip"><span><i class="fa-solid fa-book-bookmark"></i> Private knowledge retrieval</span><span><i class="fa-solid fa-link"></i> Source-backed answers</span><span><i class="fa-solid fa-diagram-project"></i> Agentic workflows</span></div>
+          <div class="suggestion-heading"><div><span class="section-overline">GET STARTED</span><h3>What can I help you with?</h3></div><span class="suggestion-note">Select a prompt or ask anything</span></div>
+          <div class="suggestion-grid">
+            <button class="suggestion-card" data-question="How do I reset my company password?"><span class="suggestion-icon violet"><i class="fa-solid fa-key"></i></span><span class="suggestion-text"><strong>Password & access</strong><small>Reset credentials and solve sign-in issues.</small></span><i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i></button>
+            <button class="suggestion-card" data-question="How do I connect to the company VPN?"><span class="suggestion-icon blue"><i class="fa-solid fa-shield-halved"></i></span><span class="suggestion-text"><strong>VPN & security</strong><small>Connect securely from anywhere.</small></span><i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i></button>
+            <button class="suggestion-card" data-question="How do I set up my company laptop?"><span class="suggestion-icon amber"><i class="fa-solid fa-laptop"></i></span><span class="suggestion-text"><strong>Device setup</strong><small>Get your laptop and devices ready.</small></span><i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i></button>
+            <button class="suggestion-card" data-question="I cannot access my company email. How can I fix it?"><span class="suggestion-icon mint"><i class="fa-solid fa-envelope"></i></span><span class="suggestion-text"><strong>Email & software</strong><small>Fix email, apps, and productivity tools.</small></span><i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i></button>
+          </div>
+          <div class="welcome-footnote"><i class="fa-solid fa-lock"></i> Company knowledge is prioritised. External sources are used only when the workflow determines they are needed.</div>
+        </div>
+        <div class="messages-container" id="messagesContainer" aria-live="polite"></div>
+      </div>
+      <footer class="chat-footer">
+        <form class="composer" id="chatForm">
+          <textarea id="questionInput" rows="1" maxlength="3000" placeholder="Describe your IT issue or ask a question…" aria-label="Your IT support question" required></textarea>
+          <div class="composer-bottom"><div class="composer-tools"><span><i class="fa-solid fa-lock"></i> Secure conversation</span><span class="composer-separator"></span><span>Enter to send · Shift + Enter for a new line</span></div><button class="send-button" id="sendButton" type="submit" disabled aria-label="Send message"><i class="fa-solid fa-arrow-up"></i></button></div>
+        </form>
+        <div class="disclaimer">Synapse AI can make mistakes. Verify critical IT or security instructions with your IT team.</div>
+      </footer>
+    </section>
+
+    <section class="view-panel utility-view" id="knowledgeView" data-panel="knowledge">
+      <div class="utility-content">
+        <div class="utility-hero"><div class="utility-icon"><i class="fa-solid fa-book-open"></i></div><span class="section-overline">COMPANY KNOWLEDGE</span><h2>Your knowledge hub.</h2><p>Give your support copilot trusted company context. Upload internal documentation and make it available to the retrieval workflow.</p></div>
+        <div class="utility-grid">
+          <article class="feature-card"><div class="feature-icon"><i class="fa-solid fa-file-arrow-up"></i></div><h3>Ingest a document</h3><p>Upload a handbook, runbook, policy, or troubleshooting guide. The backend chunks, embeds, and indexes the content in your configured vector store.</p><button class="primary-action" id="openUpload"><i class="fa-solid fa-plus"></i> Add company document</button><div class="feature-foot"><i class="fa-solid fa-shield-halved"></i> Admin-key protected ingestion</div></article>
+          <article class="feature-card"><div class="feature-icon blue"><i class="fa-solid fa-magnifying-glass"></i></div><h3>Ask across your docs</h3><p>Ask the assistant a question. Relevant private knowledge sources and available citations are attached to the answer.</p><button class="secondary-action" data-go-assistant>Go to assistant <i class="fa-solid fa-arrow-right"></i></button><div class="feature-foot"><i class="fa-solid fa-check-circle"></i> Uses the existing RAG endpoint</div></article>
+          <article class="feature-card"><div class="feature-icon mint"><i class="fa-solid fa-diagram-project"></i></div><h3>Agentic retrieval</h3><p>The workflow can route a query, retrieve private evidence, grade evidence, use fallback when configured, and return a grounded response.</p><button class="secondary-action" id="workflowInfo"><i class="fa-solid fa-circle-info"></i> View workflow details</button><div class="feature-foot"><i class="fa-solid fa-code-branch"></i> LangGraph-powered workflow</div></article>
+        </div>
+        <div class="supported-panel"><div><span class="section-overline">SUPPORTED FORMATS</span><h3>Bring your existing documentation.</h3><p>Files are sent to your protected ingestion endpoint for indexing.</p></div><div class="format-list"><span><i class="fa-solid fa-file-pdf"></i> PDF</span><span><i class="fa-solid fa-file-word"></i> DOCX</span><span><i class="fa-solid fa-file-lines"></i> TXT</span><span><i class="fa-brands fa-markdown"></i> Markdown</span></div></div>
+        <div class="notice-panel"><i class="fa-solid fa-circle-info"></i><span>Indexed document inventory is not currently exposed by the backend API. This page therefore provides upload and indexing, but does not display a fabricated document list.</span></div>
+      </div>
+    </section>
+
+    <section class="view-panel utility-view" id="activityView" data-panel="activity">
+      <div class="utility-content activity-content"><div class="utility-hero"><div class="utility-icon blue"><i class="fa-solid fa-clock-rotate-left"></i></div><span class="section-overline">YOUR WORKSPACE</span><h2>Activity history.</h2><p>Pick up where you left off. Conversations are stored in this browser so you can revisit them later.</p></div>
+        <div class="activity-panel"><div class="activity-panel-head"><div><h3>Recent conversations</h3><p id="activitySubtext">Saved locally in this browser</p></div><span class="activity-count" id="activityCount">0 conversations</span></div><div id="activityList" class="activity-list"><div class="activity-empty"><i class="fa-regular fa-message"></i><strong>No activity yet</strong><span>Start a conversation with the AI assistant to see it here.</span><button class="secondary-action" data-go-assistant>Start a conversation <i class="fa-solid fa-arrow-right"></i></button></div></div></div>
+        <div class="activity-actions"><button class="secondary-action" id="exportAll"><i class="fa-solid fa-download"></i> Export all conversations</button><button class="danger-action" id="clearHistoryActivity"><i class="fa-solid fa-trash-can"></i> Clear history</button></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="uploadModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="uploadTitle">
+    <div class="modal-head"><div class="modal-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><button class="icon-button modal-close" id="closeUpload" aria-label="Close upload dialog"><i class="fa-solid fa-xmark"></i></button></div>
+    <span class="section-overline">KNOWLEDGE BASE</span><h2 id="uploadTitle">Add a company document.</h2><p class="modal-description">Upload a supported file. It will be processed and indexed by your existing backend ingestion pipeline.</p>
+    <form id="uploadForm">
+      <label class="drop-zone" for="knowledgeFile"><i class="fa-solid fa-file-arrow-up"></i><strong>Choose a file to upload</strong><span>PDF, DOCX, TXT or MD · Maximum size depends on server configuration</span><em id="selectedFileName">Browse files</em><input type="file" id="knowledgeFile" accept=".pdf,.docx,.txt,.md" required /></label>
+      <label class="field-label" for="adminKey">Administrator API key</label><input class="admin-input" id="adminKey" type="password" placeholder="Enter your admin key" autocomplete="off" required />
+      <div class="upload-feedback" id="uploadFeedback" role="status" aria-live="polite"></div>
+      <div class="upload-progress hidden" id="uploadProgress"><span></span></div>
+      <div class="modal-actions"><button type="button" class="secondary-action" id="cancelUpload">Cancel</button><button type="submit" class="primary-action" id="uploadSubmit"><i class="fa-solid fa-arrow-up-from-bracket"></i> Upload & index</button></div>
+    </form>
+    <div class="modal-security"><i class="fa-solid fa-lock"></i> The administrator key is used for this request and is not saved.</div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="infoModal" aria-hidden="true"><div class="modal-card info-card" role="dialog" aria-modal="true" aria-labelledby="infoTitle"><div class="modal-head"><div class="modal-icon"><i class="fa-solid fa-diagram-project"></i></div><button class="icon-button modal-close" id="closeInfo" aria-label="Close information"><i class="fa-solid fa-xmark"></i></button></div><span class="section-overline">HOW IT WORKS</span><h2 id="infoTitle">Agentic RAG workflow</h2><p class="modal-description">The UI visualises the trace returned by your backend for each completed request. The following is the intended workflow described by this project:</p><ol class="workflow-list"><li><b>Route question</b><span>Determine how the request should be handled.</span></li><li><b>Retrieve private knowledge</b><span>Search the company knowledge base.</span></li><li><b>Grade evidence</b><span>Assess whether retrieved context is useful.</span></li><li><b>Web fallback if weak</b><span>Use external evidence when the configured workflow requires it.</span></li><li><b>Rewrite & retry</b><span>Improve the query and retrieve again when needed.</span></li><li><b>Grounded answer</b><span>Return the response with source metadata and citations.</span></li></ol><div class="modal-actions"><button class="primary-action" id="closeInfoAction">Got it</button></div></div></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="{{ url_for('static', path='js/app.js') }}"></script>
+</body>
+</html>
