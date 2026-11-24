@@ -690,6 +690,6 @@ GitHub: [@Rishabh-0909](https://github.com/Rishabh-0909)
 
 ---
 
-If you find this project useful, feel free to explore the repository and share feedback or suggestions.
+If you find this project useful, feel free to explore the repository and share feedback or suggestions
 
 
