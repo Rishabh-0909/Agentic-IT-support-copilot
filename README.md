@@ -113,19 +113,19 @@ The screenshots below show the local application interface.
 
 ### AI assistant — direct response
 
-![AI assistant direct response](docs/screenshots/assistant-direct-response.png)
+![AI assistant direct response](screenshots/assistant-direct-response.png)
 
 ### AI assistant — private knowledge-base response
 
-![AI assistant private knowledge-base response](docs/screenshots/assistant-private-kb-response.png)
+![AI assistant private knowledge-base response](screenshots/assistant-private-kb-response.png)
 
 ### Knowledge base and document ingestion
 
-![Knowledge base page](docs/screenshots/knowledge-base.png)
+![Knowledge base page](screenshots/knowledge-base.png)
 
 ### Activity history
 
-![Activity history page](docs/screenshots/activity-history.png)
+![Activity history page](screenshots/activity-history.png)
 
 ---
 
